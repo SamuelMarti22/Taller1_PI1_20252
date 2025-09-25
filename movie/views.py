@@ -6,6 +6,7 @@ import io
 from collections import Counter
 import urllib, base64
 from .models import Movie
+from .management.commands.movie_recommendations import get_best_movie
 # Create your views here.
 
 def home(request):
@@ -26,6 +27,16 @@ def about(request):
 def signup(request):
     email = request.GET.get('email')
     return render(request, 'signup.html', {'email':email})
+
+def recommendations(request):
+    prompt = request.GET.get('prompt')
+    print(prompt)
+    if prompt:
+        movie = get_best_movie(prompt)[0]
+        print(movie)
+    else:
+        movie = None
+    return render(request, 'recommendations.html', {"prompt":prompt, 'movie':movie})
 
 
 def _figure_to_base64(fig=None):

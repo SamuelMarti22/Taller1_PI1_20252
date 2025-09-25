@@ -23,11 +23,12 @@ from movie import views as movieViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('',movieViews.home, name = 'home'),
-    path ('about/',movieViews.about),
+    path ('', movieViews.home, name = 'home'),
+    path ('about/', movieViews.about),
     path ('news/', include('news.urls')),
     path ('statistics/', movieViews.statistics_view, name = 'statistics'),
-    path('signup/', movieViews.signup, name ='signup'),
+    path ('signup/', movieViews.signup, name ='signup'),
+    path ('recommendations/', movieViews.recommendations, name = 'recommendations')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
